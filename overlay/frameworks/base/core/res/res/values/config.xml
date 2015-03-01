@@ -112,12 +112,6 @@
         <item>0</item>
     </integer-array>
 
-    <!-- Minimum screen brightness allowed by the power manager. -->
-    <integer name="config_screenBrightnessDim">1</integer>
-
-    <!-- Screen brightness when dozing -->
-    <integer name="config_screenBrightnessDoze">17</integer>
-
     <!-- Screen brightness used to dim the screen when the user activity
          timeout expires.  May be less than the minimum allowed brightness setting
          that can be set by the user. -->
@@ -221,16 +215,8 @@
          and opening it causes the device to wake up. The default is false. -->
     <bool name="config_lidControlsSleep">true</bool>
 
-    <!-- Dream of notifications -->
-    <string name="config_dozeComponent">com.android.systemui/com.android.systemui.doze.DozeService</string>
-    <bool name="config_powerDecoupleAutoSuspendModeFromDisplay">true</bool>
-    <bool name="config_powerDecoupleInteractiveModeFromDisplay">true</bool>
-
     <!-- Is the device capable of hot swapping an UICC Card -->
     <bool name="config_hotswapCapable">true</bool>
-
-    <!-- Whether UI for multi user should be shown -->
-    <bool name="config_enableMultiUserUI">true</bool>
 
     <!-- Hardware keys present on the device, stored as a bit field.
          This integer should equal the sum of the corresponding value for each
@@ -259,4 +245,5 @@
          For example, a device with Home, Back and Menu keys would set this
          config to 7. -->
     <integer name="config_deviceHardwareWakeKeys">64</integer>
+
 </resources>

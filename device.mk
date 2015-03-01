@@ -30,7 +30,6 @@ endif
 
 LOCAL_FSTAB := $(LOCAL_PATH)/fstab.flounder
 
-
 TARGET_RECOVERY_FSTAB = $(LOCAL_FSTAB)
 
 PRODUCT_COPY_FILES := \
@@ -145,6 +144,10 @@ PRODUCT_COPY_FILES += \
     device/htc/flounder/nfc/libnfc-brcm.conf:system/etc/libnfc-brcm.conf \
     device/htc/flounder/nfc/libnfc-brcm-20795a10.conf:system/etc/libnfc-brcm-20795a10.conf
 
+# Bluetooth config files
+PRODUCT_COPY_FILES += \
+    $(LOCAL_PATH)/bluetooth/bt_vendor.conf:system/etc/bluetooth/bt_vendor.conf
+
 PRODUCT_AAPT_CONFIG := normal large xlarge hdpi xhdpi xxhdpi
 PRODUCT_AAPT_PREF_CONFIG := xhdpi
 
@@ -160,10 +163,9 @@ DEVICE_PACKAGE_OVERLAYS := \
     $(LOCAL_PATH)/overlay
 endif
 
-PRODUCT_TAGS += dalvik.gc.type-precise
-
 # NFC packages
 PRODUCT_PACKAGES += \
+    com.android.nfc_extras \
     nfc_nci.bcm2079x.default \
     NfcNci \
     Tag \
@@ -235,8 +237,8 @@ PRODUCT_PACKAGES += \
 	VolantisKeyboard
 
 # for launcher layout
-PRODUCT_PACKAGES += \
-    VolantisLayout
+#PRODUCT_PACKAGES += \
+#    VolantisLayout
 
 # Allows healthd to boot directly from charger mode rather than initiating a reboot.
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
