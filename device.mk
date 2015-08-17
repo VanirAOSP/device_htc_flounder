@@ -20,6 +20,16 @@ PRODUCT_PACKAGES := \
     wpa_supplicant \
     wpa_supplicant.conf
 
+ifeq ($(TARGET_PREBUILT_KERNEL),)
+ifeq ($(USE_SVELTE_KERNEL), true)
+LOCAL_KERNEL := device/htc/flounder_svelte-kernel/Image.gz-dtb
+else
+LOCAL_KERNEL := device/htc/flounder-kernel/Image.gz-dtb
+endif # USE_SVELTE_KERNEL
+else
+LOCAL_KERNEL := $(TARGET_PREBUILT_KERNEL)
+endif
+
 BOARD_USERDATAIMAGE_FILE_SYSTEM_TYPE := f2fs
 
 # This ensures the needed build tools are available.
@@ -239,9 +249,7 @@ PRODUCT_PACKAGES += \
 PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
     ro.enable_boot_charger_mode=1
 
-# Enable USB OTG (CAF commit to Settings)
-ADDITIONAL_BUILD_PROPERTIES += \
-    persist.sys.isUsbOtgEnabled=true
+$(call inherit-product, build/target/product/verity.mk)
 
 $(call inherit-product-if-exists, hardware/nvidia/tegra132/tegra132.mk)
 $(call inherit-product-if-exists, vendor/nvidia/proprietary-tegra132/tegra132-vendor.mk)
