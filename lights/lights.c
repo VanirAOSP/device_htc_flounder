@@ -18,12 +18,13 @@
 
 #include <cutils/log.h>
 
+#include <malloc.h>
 #include <stdint.h>
 #include <string.h>
 #include <unistd.h>
 #include <errno.h>
 #include <fcntl.h>
-
+#include <stdlib.h>
 #include <sys/ioctl.h>
 #include <sys/types.h>
 
