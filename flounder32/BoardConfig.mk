@@ -13,4 +13,4 @@ TARGET_2ND_CPU_ABI2 :=
 TARGET_2ND_CPU_VARIANT :=
 
 # Re-enable emulator for 32-bit
-BUILD_EMULATOR := false
+BUILD_EMULATOR := true
