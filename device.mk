@@ -151,11 +151,7 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/qct/lib64/libloc_core.so:system/lib64/libloc_core.so \
     $(LOCAL_PATH)/gps/qct/lib64/libloc_ds_api.so:system/lib64/libloc_ds_api.so \
     $(LOCAL_PATH)/gps/qct/lib64/libloc_eng.so:system/lib64/libloc_eng.so \
-    $(LOCAL_PATH)/gps/qct/lib64/hw/gps.default.so:system/lib64/hw/gps.default.so \
-    $(LOCAL_PATH)/gps/qct/lib_vendor/libmdmdetect.so:vendor/lib/libmdmdetect.so \
-    $(LOCAL_PATH)/gps/qct/lib_vendor/libperipheral_client.so:vendor/lib/libperipheral_client.so \
-    $(LOCAL_PATH)/gps/qct/lib64_vendor/libmdmdetect.so:vendor/lib64/libmdmdetect.so \
-    $(LOCAL_PATH)/gps/qct/lib64_vendor/libperipheral_client.so:vendor/lib64/libperipheral_client.so
+    $(LOCAL_PATH)/gps/qct/lib64/hw/gps.default.so:system/lib64/hw/gps.default.so
 
 
 # NFC feature + config files
@@ -270,7 +266,6 @@ $(call inherit-product, build/target/product/verity.mk)
 PRODUCT_SUPPORTS_BOOT_SIGNER := false
 PRODUCT_SYSTEM_VERITY_PARTITION := /dev/block/platform/sdhci-tegra.3/by-name/APP
 PRODUCT_VENDOR_VERITY_PARTITION := /dev/block/platform/sdhci-tegra.3/by-name/VNR
-$(call inherit-product, build/target/product/verity.mk)
 
 # for warning
 PRODUCT_PACKAGES += \
