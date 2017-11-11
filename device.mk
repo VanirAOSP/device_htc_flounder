@@ -14,7 +14,9 @@
 # limitations under the License.
 #
 
+# Wifi
 PRODUCT_PACKAGES := \
+    android.hardware.wifi@1.0-service \
     libwpa_client \
     hostapd \
     wificond \
@@ -58,12 +60,6 @@ PRODUCT_COPY_FILES += \
 # headset keylayout
 PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/h2w_headset.kl:system/usr/keylayout/h2w_headset.kl
-
-PRODUCT_PACKAGES += \
-    libwpa_client \
-    hostapd \
-    wpa_supplicant \
-    wpa_supplicant.conf
 
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/tablet_core_hardware.xml:system/etc/permissions/tablet_core_hardware.xml \
@@ -144,7 +140,6 @@ PRODUCT_COPY_FILES += \
     $(LOCAL_PATH)/gps/qct/lib64/libloc_eng.so:system/lib64/libloc_eng.so \
     $(LOCAL_PATH)/gps/qct/lib64/hw/gps.default.so:system/lib64/hw/gps.default.so
 
-
 # NFC feature + config files
 PRODUCT_COPY_FILES += \
     frameworks/native/data/etc/android.hardware.nfc.xml:system/etc/permissions/android.hardware.nfc.xml \
@@ -173,10 +168,17 @@ endif
 
 # NFC packages
 PRODUCT_PACKAGES += \
+    android.hardware.nfc@1.0-impl-bcm \
     nfc_nci.bcm2079x.default \
     NfcNci \
-    Tag \
-    android.hardware.nfc@1.0-impl
+    Tag
+
+# Audio HAL
+PRODUCT_PACKAGES += \
+    android.hardware.audio@2.0-impl \
+    android.hardware.audio.effect@2.0-impl \
+    android.hardware.broadcastradio@1.0-impl \
+    android.hardware.soundtrigger@2.0-impl
 
 # Bluetooth HAL
 PRODUCT_PACKAGES += \
@@ -187,12 +189,74 @@ PRODUCT_PACKAGES += \
     librs_jni \
     com.android.future.usb.accessory
 
+# Camera HAL
 PRODUCT_PACKAGES += \
-    power.flounder \
-    lights.flounder \
-    sensors.flounder \
-    thermal.flounder \
+    camera.device@3.2-impl \
+    android.hardware.camera.provider@2.4-impl
+
+# DRM HAL
+PRODUCT_PACKAGES += \
+    android.hardware.drm@1.0-impl
+
+# Gatekeeper HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gatekeeper@1.0-impl
+
+# GNSS HAL
+PRODUCT_PACKAGES += \
+    android.hardware.gnss@1.0-impl
+
+# Graphics HAL
+PRODUCT_PACKAGES += \
+    android.hardware.graphics.allocator@2.0-impl \
+    android.hardware.graphics.allocator@2.0-service \
+    android.hardware.graphics.composer@2.1-impl \
+    android.hardware.graphics.mapper@2.0-impl \
     hwcomposer.flounder
+
+# Health HAL
+PRODUCT_PACKAGES += \
+    android.hardware.health@1.0-impl
+
+# Keymaster HAL
+PRODUCT_PACKAGES += \
+    android.hardware.keymaster@3.0-impl
+
+# Light HAL
+PRODUCT_PACKAGES += \
+    android.hardware.light@2.0-impl \
+    lights.flounder
+
+# Memtrack HAL
+PRODUCT_PACKAGES += \
+    android.hardware.memtrack@1.0-impl
+
+# Power HAL
+PRODUCT_PACKAGES += \
+    android.hardware.power@1.0-impl \
+    power.flounder
+
+# RenderScript HAL
+PRODUCT_PACKAGES += \
+    android.hardware.renderscript@1.0-impl
+
+# Sensors HAL
+PRODUCT_PACKAGES += \
+    android.hardware.sensors@1.0-impl \
+    sensors.flounder
+
+# Thermal HAL
+PRODUCT_PACKAGES += \
+    android.hardware.thermal@1.0-impl \
+    thermal.flounder
+
+# USB HAL
+PRODUCT_PACKAGES += \
+    android.hardware.usb@1.0-service
+
+# Vibrator
+PRODUCT_PACKAGES += \
+    android.hardware.vibrator@1.0-impl
 
 # Filesystem management tools
 PRODUCT_PACKAGES += \
@@ -253,6 +317,10 @@ PRODUCT_PACKAGES += \
 #PRODUCT_PACKAGES += \
 #    VolantisLayout
 
+# Default OMX service to non-Treble
+PRODUCT_PROPERTY_OVERRIDES += \
+    persist.media.treble_omx=false
+
 # drmservice prop
 PRODUCT_PROPERTY_OVERRIDES += \
     drm.service.enabled=true
@@ -273,6 +341,10 @@ PRODUCT_DEFAULT_PROPERTY_OVERRIDES += \
 PRODUCT_PROPERTY_OVERRIDES += \
     af.fast_track_multiplier=1 \
     audio_hal.period_size=128
+
+# Vendor seccomp policy files for media components:
+PRODUCT_COPY_FILES += \
+    device/htc/flounder/seccomp_policy/mediacodec.policy:$(TARGET_COPY_OUT_VENDOR)/etc/seccomp_policy/mediacodec.policy
 
 # only include verity on user builds for CM
 ifeq ($(TARGET_BUILD_VARIANT),user)
